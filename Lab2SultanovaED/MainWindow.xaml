@@ -1,0 +1,171 @@
+<Window x:Class="Lab2SultanovaED.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow"
+        Height="700"
+        Width="900"
+        MinHeight="780"
+        MinWidth="820">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="10">
+            <GroupBox Header="Метод Thread" Margin="0,0,0,10" Padding="10">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Row="0" Grid.Column="0" Content="Размер массива:" Margin="3"/>
+                    <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding ThreadArraySize, UpdateSourceTrigger=PropertyChanged}" Margin="3"/>
+                    <Button Grid.Row="0" Grid.Column="2" Content="Сгенерировать" Command="{Binding GenerateThreadArrayCommand}" Margin="3" Width="130"/>
+
+                    <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Text="{Binding ThreadOriginalArrayString}" Margin="3" TextWrapping="Wrap"/>
+
+                    <UniformGrid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Columns="4" Margin="3">
+                        <Button Content="Пузырьковая" Command="{Binding BubbleSortThreadCommand}" Margin="3" MinHeight="30"/>
+                        <Button Content="Быстрая" Command="{Binding QuickSortThreadCommand}" Margin="3" MinHeight="30"/>
+                        <Button Content="Вставками" Command="{Binding InsertionSortThreadCommand}" Margin="3" MinHeight="30"/>
+                        <Button Content="Шейкерная" Command="{Binding ShakerSortThreadCommand}" Margin="3" MinHeight="30"/>
+                    </UniformGrid>
+
+                    <Grid Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" Margin="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="180"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="{Binding ThreadBubbleSortResult}" TextWrapping="Wrap" VerticalAlignment="Center"/>
+                        <ProgressBar Grid.Column="1" Minimum="0" Maximum="100" Value="{Binding ThreadBubbleProgress}" Height="18" Margin="8,0,0,0"/>
+                    </Grid>
+
+                    <Grid Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Margin="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="180"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="{Binding ThreadQuickSortResult}" TextWrapping="Wrap" VerticalAlignment="Center"/>
+                        <ProgressBar Grid.Column="1" Minimum="0" Maximum="100" Value="{Binding ThreadQuickProgress}" Height="18" Margin="8,0,0,0"/>
+                    </Grid>
+
+                    <Grid Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3" Margin="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="180"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="{Binding ThreadInsertionSortResult}" TextWrapping="Wrap" VerticalAlignment="Center"/>
+                        <ProgressBar Grid.Column="1" Minimum="0" Maximum="100" Value="{Binding ThreadInsertionProgress}" Height="18" Margin="8,0,0,0"/>
+                    </Grid>
+
+                    <Grid Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="3" Margin="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="180"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="{Binding ThreadShakerSortResult}" TextWrapping="Wrap" VerticalAlignment="Center"/>
+                        <ProgressBar Grid.Column="1" Minimum="0" Maximum="100" Value="{Binding ThreadShakerProgress}" Height="18" Margin="8,0,0,0"/>
+                    </Grid>
+
+                    <StackPanel Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="3" Margin="3,8,3,3">
+                        <TextBlock Text="{Binding ThreadTotalComparisons}" FontWeight="Bold" Margin="0,0,0,6"/>
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,6">
+                            <Label Content="Макс потоков:" VerticalAlignment="Center"/>
+                            <TextBox Text="{Binding ThreadMaxParallelSorts, UpdateSourceTrigger=PropertyChanged}" Width="60" Margin="6,0,16,0" VerticalAlignment="Center"/>
+                            <CheckBox Content="Общий массив" IsChecked="{Binding ThreadUseSharedArray}" VerticalAlignment="Center" Margin="0,0,16,0"/>
+                            <Button Content="Прервать все" Command="{Binding CancelThreadSortsCommand}" Width="130"/>
+                        </StackPanel>
+                        <TextBlock Text="{Binding ThreadComparisonSummary}" TextWrapping="Wrap"/>
+                    </StackPanel>
+                </Grid>
+            </GroupBox>
+
+            <GroupBox Header="Метод Task" Padding="10">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Row="0" Grid.Column="0" Content="Размер массива:" Margin="3"/>
+                    <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding TaskArraySize, UpdateSourceTrigger=PropertyChanged}" Margin="3"/>
+                    <Button Grid.Row="0" Grid.Column="2" Content="Сгенерировать" Command="{Binding GenerateTaskArrayCommand}" Margin="3" Width="130"/>
+
+                    <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Text="{Binding TaskOriginalArrayString}" Margin="3" TextWrapping="Wrap"/>
+
+                    <UniformGrid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Columns="4" Margin="3">
+                        <Button Content="Пузырьковая" Command="{Binding BubbleSortTaskCommand}" Margin="3" MinHeight="30"/>
+                        <Button Content="Быстрая" Command="{Binding QuickSortTaskCommand}" Margin="3" MinHeight="30"/>
+                        <Button Content="Вставками" Command="{Binding InsertionSortTaskCommand}" Margin="3" MinHeight="30"/>
+                        <Button Content="Пирамидальная" Command="{Binding HeapSortTaskCommand}" Margin="3" MinHeight="30"/>
+                    </UniformGrid>
+
+                    <Grid Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" Margin="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="180"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="{Binding TaskBubbleSortResult}" TextWrapping="Wrap" VerticalAlignment="Center"/>
+                        <ProgressBar Grid.Column="1" Minimum="0" Maximum="100" Value="{Binding TaskBubbleProgress}" Height="18" Margin="8,0,0,0"/>
+                    </Grid>
+
+                    <Grid Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Margin="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="180"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="{Binding TaskQuickSortResult}" TextWrapping="Wrap" VerticalAlignment="Center"/>
+                        <ProgressBar Grid.Column="1" Minimum="0" Maximum="100" Value="{Binding TaskQuickProgress}" Height="18" Margin="8,0,0,0"/>
+                    </Grid>
+
+                    <Grid Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3" Margin="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="180"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="{Binding TaskInsertionSortResult}" TextWrapping="Wrap" VerticalAlignment="Center"/>
+                        <ProgressBar Grid.Column="1" Minimum="0" Maximum="100" Value="{Binding TaskInsertionProgress}" Height="18" Margin="8,0,0,0"/>
+                    </Grid>
+
+                    <Grid Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="3" Margin="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="180"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="{Binding TaskHeapSortResult}" TextWrapping="Wrap" VerticalAlignment="Center"/>
+                        <ProgressBar Grid.Column="1" Minimum="0" Maximum="100" Value="{Binding TaskHeapProgress}" Height="18" Margin="8,0,0,0"/>
+                    </Grid>
+
+                    <StackPanel Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="3" Margin="3,8,3,3">
+                        <TextBlock Text="{Binding TaskTotalComparisons}" FontWeight="Bold" Margin="0,0,0,6"/>
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,6">
+                          
+                            <CheckBox Content="Общий массив" IsChecked="{Binding TaskUseSharedArray}" VerticalAlignment="Center" Margin="0,0,16,0"/>
+                            <Button Content="Прервать все" Command="{Binding CancelTaskSortsCommand}" Width="130"/>
+                        </StackPanel>
+                        <TextBlock Text="{Binding TaskComparisonSummary}" TextWrapping="Wrap"/>
+                    </StackPanel>
+                </Grid>
+            </GroupBox>
+        </StackPanel>
+    </ScrollViewer>
+</Window>
